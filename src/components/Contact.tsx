@@ -4,26 +4,30 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative px-6 py-32">
-      <div className="mx-auto max-w-3xl text-center">
+    <section id="contact" className="relative px-6 pb-28 pt-8">
+      <div className="mx-auto max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
+          className="relative overflow-hidden rounded-3xl bg-foreground px-8 py-16 text-center sm:px-16"
         >
-          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Let&apos;s <span className="gradient-text">Connect</span>
+          {/* Subtle warm glow on dark card */}
+          <div className="pointer-events-none absolute top-0 right-0 h-[300px] w-[300px] rounded-full bg-accent/15 blur-[100px]" />
+
+          <h2 className="relative mb-4 font-serif text-3xl tracking-tight text-background sm:text-4xl">
+            Let&apos;s build something together
           </h2>
-          <p className="mx-auto mb-10 max-w-xl text-muted">
-            Have a question, partnership idea, or want to learn more about our
-            products? We&apos;d love to hear from you.
+          <p className="relative mx-auto mb-10 max-w-md text-sm leading-relaxed text-background/60">
+            Have a question, partnership idea, or just want to say hello?
+            We&apos;d love to hear from you.
           </p>
 
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="relative flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
               href="mailto:hello@pilotai.systems"
-              className="rounded-full bg-accent px-8 py-3 text-sm font-medium text-white transition-all hover:bg-accent-light hover:shadow-lg hover:shadow-accent/25"
+              className="rounded-full bg-background px-8 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-background/90 hover:shadow-lg"
             >
               hello@pilotai.systems
             </a>
@@ -31,7 +35,7 @@ export default function Contact() {
               href="https://t.me/pilotai"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-card-border px-8 py-3 text-sm font-medium text-foreground transition-all hover:border-muted hover:bg-card"
+              className="rounded-full border border-background/20 px-8 py-3.5 text-sm font-medium text-background transition-all hover:bg-background/10"
             >
               Telegram
             </a>
