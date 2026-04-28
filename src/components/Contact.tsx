@@ -26,10 +26,10 @@ export default function Contact() {
 
           <div className="relative flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="mailto:hello@pilotai.systems"
+              href="mailto:support@pilotaisystems.com"
               className="rounded-full bg-background px-8 py-3.5 text-sm font-medium text-foreground transition-all hover:bg-background/90 hover:shadow-lg"
             >
-              hello@pilotai.systems
+              support@pilotaisystems.com
             </a>
             <a
               href="https://t.me/pilotai"

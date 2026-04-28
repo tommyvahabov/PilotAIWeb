@@ -22,8 +22,8 @@ const dmSerif = DM_Serif_Display({
 export const metadata: Metadata = {
   title: "Pilot AI Systems | Intelligent Software for Everyone",
   description:
-    "Pilot AI Systems builds intelligent applications that make learning, automation, and content creation effortless. Home of QuizPilot, AutoPilot, and more.",
-  keywords: ["AI", "artificial intelligence", "QuizPilot", "AutoPilot", "Presenton", "Telegram", "education", "automation"],
+    "Pilot AI Systems builds intelligent applications that make learning, automation, and content creation effortless. Home of QuizPilot, AvtoPilot, and more.",
+  keywords: ["AI", "artificial intelligence", "QuizPilot", "AvtoPilot", "Presenton", "Telegram", "education", "driving exam", "spaced repetition"],
   openGraph: {
     title: "Pilot AI Systems",
     description: "Intelligent software for everyone",

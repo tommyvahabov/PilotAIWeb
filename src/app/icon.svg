@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="g1" cx="157.75" cy="81.09" fx="157.75" fy="81.09" r="95.05" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".09" stop-color="#ffecd8"/>
+      <stop offset=".21" stop-color="#ffd4a7"/>
+      <stop offset=".33" stop-color="#ffc07d"/>
+      <stop offset=".46" stop-color="#ffb05a"/>
+      <stop offset=".59" stop-color="#ffa340"/>
+      <stop offset=".72" stop-color="#ff9a2d"/>
+      <stop offset=".86" stop-color="#ff9421"/>
+      <stop offset="1" stop-color="#ff931e"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="150.69" cy="118.45" fx="150.69" fy="118.45" r="53.04" xlink:href="#g1"/>
+  </defs>
+  <rect width="240" height="240" rx="48" fill="#1C1917"/>
+  <g transform="translate(7, 38)">
+    <path fill="url(#g1)" d="M226.15,154.32v-75.05c0-38.84-31.48-70.32-70.32-70.32H0l8.65,8.65c23.42,23.42,55.18,36.58,88.3,36.58h50.43c28.29,0,53.3,18.35,61.8,45.33s17.2,54.81,16.97,54.81Z"/>
+    <path fill="url(#g2)" d="M187.45,156.25v-41.87c0-21.67-17.57-39.24-39.24-39.24H61.26l4.83,4.83c13.07,13.07,30.79,20.41,49.27,20.41h28.14c15.78,0,29.74,10.24,34.48,25.3,4.66,14.79,9.6,30.58,9.47,30.58Z"/>
+  </g>
+</svg>
