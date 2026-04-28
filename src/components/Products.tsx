@@ -10,7 +10,7 @@ const products = [
     description:
       "Telegram-based quiz platform with AI-powered question generation, spaced repetition, and integrated payments.",
     status: "Live",
-    image: "/quizpilot.jpeg",
+    image: "/quizpilot-logo.png",
     color: "from-blue-500/10 to-blue-600/5",
   },
   {
@@ -19,7 +19,7 @@ const products = [
     description:
       "Smart automation platform that streamlines workflows and repetitive tasks using intelligent AI agents.",
     status: "Coming Soon",
-    image: "/autopilot.jpeg",
+    image: "/autopilot-logo.png",
     color: "from-amber-500/10 to-orange-600/5",
   },
 ];
