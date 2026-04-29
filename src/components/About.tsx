@@ -1,61 +1,51 @@
-"use client";
-
-import { motion } from "framer-motion";
+const meta = [
+  { label: "Location", value: "London" },
+  { label: "Founded", value: "2025" },
+  { label: "Team", value: "Small, remote" },
+  { label: "Focus", value: "Edtech AI" },
+];
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-28">
-      <div className="mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl"
-        >
-          <div className="mb-10 rounded-3xl border border-card-border bg-warm-bg p-10 sm:p-14">
-            <blockquote className="mb-6 font-serif text-2xl leading-snug tracking-tight sm:text-3xl">
-              &ldquo;Smart tools shouldn&apos;t be reserved for large
-              corporations — they should be available to{" "}
-              <span className="gradient-text">every student, creator, and professional.</span>&rdquo;
-            </blockquote>
-            <div className="flex items-center gap-3">
-              <div className="h-px flex-1 bg-card-border" />
-              <span className="text-xs font-medium uppercase tracking-widest text-muted">
-                Our philosophy
-              </span>
-              <div className="h-px flex-1 bg-card-border" />
-            </div>
-          </div>
-        </motion.div>
+    <section id="about" className="relative border-y border-card-border bg-card px-4 py-24 sm:px-6 lg:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="reveal-up">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            [ 03 ] &nbsp; The Studio
+          </p>
+          <h2 className="mb-8 font-serif text-3xl sm:text-4xl">
+            A small studio, <em className="italic text-accent-text">shipping with care.</em>
+          </h2>
 
-        <div className="grid gap-5 sm:grid-cols-3">
-          {[
-            {
-              title: "AI-first",
-              desc: "Every product starts with artificial intelligence at its core, not as an afterthought.",
-            },
-            {
-              title: "For real people",
-              desc: "We build tools for students, teachers, and professionals — not just developers.",
-            },
-            {
-              title: "Ship fast",
-              desc: "From idea to production in weeks. We believe in learning from real users, fast.",
-            },
-          ].map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-2xl border border-card-border bg-card p-6"
-            >
-              <h3 className="mb-2 font-serif text-lg">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-muted">{item.desc}</p>
-            </motion.div>
-          ))}
+          <dl className="border-y border-card-border">
+            {meta.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-baseline justify-between gap-4 border-b border-card-border py-4 last:border-b-0"
+              >
+                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                  {item.label}
+                </dt>
+                <dd className="text-sm font-medium text-foreground">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="reveal-up reveal-delay-100 space-y-6 text-base leading-relaxed text-muted-strong sm:text-lg">
+          <p>
+            Pilot AI Systems is an independent studio building AI-native software
+            for learners. We work in the spaces large platforms ignore —{" "}
+            <em className="italic text-accent-text">overlooked markets, narrow problems, real outcomes.</em>
+          </p>
+          <p>
+            We&apos;re a small team that prefers to ship the whole product, not a
+            prototype. Every interface, every flow, every edge — sweated until it
+            feels like something{" "}
+            <em className="italic text-accent-text">you&apos;d pay for.</em>
+          </p>
         </div>
       </div>
     </section>

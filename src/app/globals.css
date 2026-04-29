@@ -6,10 +6,14 @@
   --accent: #FF931E;
   --accent-light: #FFB05A;
   --accent-dark: #E07800;
+  --accent-text: #9A4A00;
   --muted: #78716C;
+  --muted-strong: #57534E;
   --card: #FFFFFF;
   --card-border: #E7E5E4;
   --warm-bg: #F5F0E8;
+  --cool: #2563EB;
+  --cool-soft: #EFF6FF;
 }
 
 @theme inline {
@@ -18,10 +22,14 @@
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --color-accent-dark: var(--accent-dark);
+  --color-accent-text: var(--accent-text);
   --color-muted: var(--muted);
+  --color-muted-strong: var(--muted-strong);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
   --color-warm-bg: var(--warm-bg);
+  --color-cool: var(--cool);
+  --color-cool-soft: var(--cool-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-dm-serif);
@@ -37,22 +45,121 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id],
+#main-content {
+  scroll-margin-top: 6rem;
+}
+
 ::selection {
   background: rgba(255, 147, 30, 0.2);
   color: #1C1917;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #FF931E 0%, #FFB05A 40%, #FF931E 100%);
+  background: linear-gradient(135deg, #9A4A00 0%, #D06B00 48%, #AE5600 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 147, 30, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 147, 30, 0.04) 1px, transparent 1px);
-  background-size: 72px 72px;
+:where(a, button):focus-visible {
+  outline: 3px solid var(--cool);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border-radius: 9999px;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-up,
+  .reveal-down,
+  .reveal-fade {
+    animation-duration: 600ms;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal-up {
+    animation-name: reveal-up;
+  }
+
+  .reveal-down {
+    animation-name: reveal-down;
+  }
+
+  .reveal-fade {
+    animation-name: reveal-fade;
+  }
+
+  .reveal-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .reveal-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .reveal-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .reveal-delay-350 {
+    animation-delay: 350ms;
+  }
+
+  .reveal-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .reveal-delay-650 {
+    animation-delay: 650ms;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    transform: translateY(20px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-down {
+  from {
+    transform: translateY(-20px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    transform: translateY(8px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

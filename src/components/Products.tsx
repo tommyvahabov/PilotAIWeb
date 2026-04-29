@@ -1,27 +1,40 @@
-"use client";
-
-import Image from "next/image";
-import { motion } from "framer-motion";
-
 type Platform = "telegram" | "appstore" | "playstore";
 
-const products: {
+type Product = {
   name: string;
   tagline: string;
   description: string;
+  bestFor: string;
   status: "Live" | "Coming Soon";
   image: string;
-  color: string;
+  tone: "blue" | "amber";
+  primaryAction: { label: string; href: string };
+  features: string[];
+  details: { label: string; value: string }[];
   platforms: { type: Platform; href: string }[];
-}[] = [
+};
+
+const products: Product[] = [
   {
     name: "QuizPilot",
-    tagline: "Turn any document into a study tool",
+    tagline: "Turn documents into study sets",
     description:
-      "Drop in a PDF, DOCX, or spreadsheet and QuizPilot generates AI-powered quizzes, flashcards, and slides in seconds. Built for students and teachers, with multilingual support and group-quiz mode.",
+      "Upload a PDF, DOCX, or spreadsheet and generate quizzes, flashcards, and slides for faster revision and classroom practice.",
+    bestFor: "Students, teachers, and teams that need quick study material from existing files.",
     status: "Live",
-    image: "/quizpilot-logo.png",
-    color: "from-blue-500/10 to-blue-600/5",
+    image: "/quizpilot-logo.svg",
+    tone: "blue",
+    primaryAction: { label: "Try QuizPilot", href: "https://t.me/quizpilot_bot" },
+    features: [
+      "Document-to-quiz generation",
+      "Flashcards and slide creation",
+      "Group quiz workflows",
+    ],
+    details: [
+      { label: "Input", value: "PDF, DOCX, XLSX" },
+      { label: "Modes", value: "Quiz, cards, slides" },
+      { label: "Access", value: "Telegram, iOS" },
+    ],
     platforms: [
       { type: "telegram", href: "https://t.me/quizpilot_bot" },
       { type: "appstore", href: "https://apps.apple.com/us/app/quizpilot-your-study-copilot/id6760037594" },
@@ -29,12 +42,24 @@ const products: {
   },
   {
     name: "AvtoPilot",
-    tagline: "Pass your driving exam, faster",
+    tagline: "Driving theory exam practice",
     description:
-      "Spaced-repetition coach for the Uzbekistan driver's license theory test. Daily sprints, mistake-killer mode, and full mock exams — in Uzbek, Russian, and English.",
+      "A focused exam-prep coach for Uzbekistan's driving theory test, with daily sprints, mistake review, and full mock exams.",
+    bestFor: "Learners preparing for the driver's license theory test in Uzbek, Russian, or English.",
     status: "Live",
     image: "/avtopilot-logo.png",
-    color: "from-amber-500/10 to-orange-600/5",
+    tone: "amber",
+    primaryAction: { label: "Start AvtoPilot", href: "https://t.me/AvtoPilotQuiz_bot" },
+    features: [
+      "Mistake-killer review mode",
+      "Timed mock exams",
+      "Uzbek, Russian, and English",
+    ],
+    details: [
+      { label: "Exam", value: "Driving theory" },
+      { label: "Practice", value: "Sprints, mocks" },
+      { label: "Access", value: "Telegram, iOS, Android" },
+    ],
     platforms: [
       { type: "telegram", href: "https://t.me/AvtoPilotQuiz_bot" },
       { type: "appstore", href: "https://apps.apple.com/gb/app/avtopilot-prava-oling/id6759839061" },
@@ -49,110 +74,169 @@ const platformLabel: Record<Platform, string> = {
   playstore: "Google Play",
 };
 
+const toneStyles = {
+  blue: {
+    panel: "bg-cool-soft",
+    text: "text-cool",
+    border: "border-cool/15",
+  },
+  amber: {
+    panel: "bg-warm-bg",
+    text: "text-accent-text",
+    border: "border-accent/20",
+  },
+};
+
 function PlatformIcon({ type }: { type: Platform }) {
   if (type === "telegram") {
     return (
-      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-        <path d="M21.94 4.51c.27-1.06-.69-1.96-1.7-1.55L2.4 9.96c-1.13.45-1.06 2.07.1 2.42l3.97 1.21 1.51 4.99c.16.52.81.69 1.2.32l2.32-2.16 4.07 3c.66.49 1.6.13 1.78-.66l3.59-14.57zM8.92 14.06l-.78 3.74-1.05-3.43 9.93-7.13-8.1 6.82z" />
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
       </svg>
     );
   }
   if (type === "appstore") {
     return (
-      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-        <path d="M17.05 12.04c-.03-2.79 2.28-4.13 2.39-4.2-1.3-1.9-3.33-2.16-4.05-2.19-1.72-.18-3.36 1.01-4.24 1.01-.88 0-2.22-.99-3.66-.96-1.88.03-3.62 1.09-4.59 2.78-1.96 3.39-.5 8.42 1.41 11.18.93 1.35 2.05 2.86 3.49 2.81 1.4-.06 1.93-.91 3.62-.91s2.17.91 3.65.88c1.51-.03 2.46-1.37 3.38-2.73 1.07-1.56 1.51-3.07 1.54-3.15-.03-.01-2.95-1.13-2.98-4.52zM14.46 4.13c.78-.94 1.3-2.25 1.16-3.55-1.12.05-2.47.74-3.27 1.69-.72.83-1.35 2.16-1.18 3.43 1.25.1 2.52-.63 3.29-1.57z" />
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+        <path d="M8.8086 14.9194l6.1107-11.0368c.0837-.1513.1682-.302.2437-.4584.0685-.142.1267-.2854.1646-.4403.0803-.3259.0588-.6656-.066-.9767-.1238-.3095-.3417-.5678-.6201-.7355a1.4175 1.4175 0 0 0-.921-.1924c-.3207.043-.6135.1935-.8443.4288-.1094.1118-.1996.2361-.2832.369-.092.1463-.175.2979-.259.4492l-.3864.6979-.3865-.6979c-.0837-.1515-.1667-.303-.2587-.4492-.0837-.1329-.1739-.2572-.2835-.369-.2305-.2353-.5233-.3857-.844-.429a1.4181 1.4181 0 0 0-.921.1926c-.2784.1677-.4964.426-.6203.7355-.1246.311-.1461.6508-.066.9767.038.155.0962.2984.1648.4403.0753.1564.1598.307.2437.4584l1.248 2.2543-4.8625 8.7825H2.0295c-.1676 0-.3351-.0007-.5026.0092-.1522.009-.3004.0284-.448.0714-.3108.0906-.5822.2798-.7783.548-.195.2665-.3006.5929-.3006.9279 0 .3352.1057.6612.3006.9277.196.2683.4675.4575.7782.548.1477.043.296.0623.4481.0715.1675.01.335.009.5026.009h13.0974c.0171-.0357.059-.1294.1-.2697.415-1.4151-.6156-2.843-2.0347-2.843zM3.113 18.5418l-.7922 1.5008c-.0818.1553-.1644.31-.2384.4705-.067.1458-.124.293-.1611.452-.0785.3346-.0576.6834.0645 1.0029.1212.3175.3346.583.607.7549.2727.172.5891.2416.9013.1975.3139-.044.6005-.1986.8263-.4402.1072-.1148.1954-.2424.2772-.3787.0902-.1503.1714-.3059.2535-.4612L6 19.4636c-.0896-.149-.9473-1.4704-2.887-.9218m20.5861-3.0056a1.4707 1.4707 0 0 0-.779-.5407c-.1476-.0425-.2961-.0616-.4483-.0705-.1678-.0099-.3352-.0091-.503-.0091H18.648l-4.3891-7.817c-.6655.7005-.9632 1.485-1.0773 2.1976-.1655 1.0333.0367 2.0934.546 3.0004l5.2741 9.3933c.084.1494.167.299.2591.4435.0837.131.1739.2537.2836.364.231.2323.5238.3809.8449.4232.3192.0424.643-.0244.9217-.1899.2784-.1653.4968-.4204.621-.7257.1246-.3072.146-.6425.0658-.9641-.0381-.1529-.0962-.2945-.165-.4346-.0753-.1543-.1598-.303-.2438-.4524l-1.216-2.1662h1.596c.1677 0 .3351.0009.5029-.009.1522-.009.3007-.028.4483-.0705a1.4707 1.4707 0 0 0 .779-.5407A1.5386 1.5386 0 0 0 24 16.452a1.539 1.539 0 0 0-.3009-.9158Z" />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
-      <path d="M3.61 1.81c-.31.32-.49.81-.49 1.45v17.48c0 .64.18 1.13.49 1.45l.06.06 9.78-9.78v-.18L3.67 1.75l-.06.06zm13.06 13.06l-3.26-3.26v-.36l3.26-3.26.07.04 3.86 2.19c1.1.62 1.1 1.65 0 2.27l-3.86 2.19-.07.04zm-.6.59L5.95 5.74l.61-.61 9.83 5.62-.32.71zm0 1.08l.32.71-9.83 5.62-.61-.61 10.12-5.72z" />
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+      <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
     </svg>
   );
 }
 
 export default function Products() {
   return (
-    <section id="products" className="relative px-6 py-28">
-      <div className="mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-14"
-        >
-          <h2 className="mb-3 font-serif text-3xl tracking-tight sm:text-4xl">
-            What we&apos;re building
-          </h2>
-          <p className="max-w-lg text-muted">
-            AI-powered tools designed for real people solving real problems.
+    <section id="products" className="relative px-4 py-24 sm:px-6 lg:py-28">
+      <div className="mx-auto max-w-6xl">
+        <div className="reveal-up mb-12 max-w-2xl">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            [ 01 ] &nbsp; Products
           </p>
-        </motion.div>
-
-        <div className="grid gap-5 sm:grid-cols-2">
-          {products.map((product, i) => (
-            <motion.div
-              key={product.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-3xl border border-card-border bg-card transition-all hover:shadow-lg hover:shadow-foreground/5"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-0 transition-opacity group-hover:opacity-100`} />
-              <div className="relative flex h-full flex-col p-7">
-                <div className="mb-5 flex items-start justify-between">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={64}
-                    height={64}
-                    className="rounded-2xl shadow-sm"
-                  />
-                  <span
-                    className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
-                      product.status === "Live"
-                        ? "bg-emerald-500/10 text-emerald-600"
-                        : "bg-amber-500/10 text-amber-600"
-                    }`}
-                  >
-                    {product.status}
-                  </span>
-                </div>
-                <h3 className="mb-1 font-serif text-xl">{product.name}</h3>
-                <p className="mb-3 text-sm font-medium text-accent">{product.tagline}</p>
-                <p className="mb-5 text-sm leading-relaxed text-muted">
-                  {product.description}
-                </p>
-                <div className="mt-auto flex flex-wrap gap-2 pt-2">
-                  {product.platforms.map((p) => (
-                    <a
-                      key={p.type}
-                      href={p.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-warm-bg px-3 py-1.5 text-xs font-medium text-foreground/80 transition-all hover:border-foreground/20 hover:bg-card hover:text-foreground"
-                    >
-                      <PlatformIcon type={p.type} />
-                      {platformLabel[p.type]}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <h2 className="mb-4 font-serif text-3xl sm:text-4xl">
+            Two products. <em className="italic text-accent-text">One studio.</em>
+          </h2>
+          <p className="text-base leading-relaxed text-muted-strong">
+            Each product is built around a specific learning job, with live distribution
+            through the channels users already open every day.
+          </p>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 text-center text-sm text-muted"
-        >
-          More products in the pipeline. Stay tuned.
-        </motion.p>
+        <div className="grid gap-6 lg:grid-cols-2">
+          {products.map((product, i) => {
+            const tone = toneStyles[product.tone];
+
+            return (
+              <article
+                key={product.name}
+                className={`reveal-up flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card shadow-sm shadow-foreground/5 ${
+                  i === 1 ? "reveal-delay-100" : ""
+                }`}
+              >
+                <div className={`border-b ${tone.border} ${tone.panel} p-6`}>
+                  <div className="mb-6 flex items-start justify-between gap-4">
+                    <div className="flex min-w-0 items-center gap-4">
+                      <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={product.image}
+                          alt=""
+                          width={64}
+                          height={64}
+                          className="block h-full w-full object-contain"
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-serif text-2xl">{product.name}</h3>
+                        <p className={`mt-1 text-sm font-semibold ${tone.text}`}>
+                          {product.tagline}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="shrink-0 rounded-full bg-card px-3 py-1 text-xs font-semibold text-emerald-700">
+                      {product.status}
+                    </span>
+                  </div>
+
+                  <p className="max-w-xl text-sm leading-relaxed text-muted-strong">
+                    {product.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-6">
+                    <p className="mb-3 text-xs font-semibold uppercase text-muted">
+                      Best for
+                    </p>
+                    <p className="text-sm leading-relaxed text-foreground">
+                      {product.bestFor}
+                    </p>
+                  </div>
+
+                  <ul className="mb-6 space-y-3 text-sm text-muted-strong">
+                    {product.features.map((feature) => (
+                      <li key={feature} className={`flex gap-3 ${tone.text}`}>
+                        <CheckIcon />
+                        <span className="text-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <dl className="mb-6 grid border-y border-card-border sm:grid-cols-3 sm:divide-x sm:divide-card-border">
+                    {product.details.map((detail) => (
+                      <div key={detail.label} className="py-4 sm:px-4 sm:first:pl-0 sm:last:pr-0">
+                        <dt className="text-xs font-semibold uppercase text-muted">
+                          {detail.label}
+                        </dt>
+                        <dd className="mt-1 text-sm font-medium text-foreground">
+                          {detail.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <div className="mt-auto space-y-4">
+                    <a
+                      href={product.primaryAction.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background transition-all hover:bg-foreground/85 hover:shadow-lg hover:shadow-foreground/10"
+                    >
+                      {product.primaryAction.label}
+                    </a>
+
+                    <div className="flex flex-wrap gap-2">
+                      {product.platforms.map((p) => (
+                        <a
+                          key={p.type}
+                          href={p.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-card-border bg-warm-bg px-4 text-sm font-medium text-foreground transition-all hover:border-foreground/20 hover:bg-card"
+                        >
+                          <PlatformIcon type={p.type} />
+                          {platformLabel[p.type]}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

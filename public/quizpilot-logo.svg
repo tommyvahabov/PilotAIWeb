@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="QuizPilot">
+  <rect width="1024" height="1024" fill="#fff"/>
+  <defs>
+    <linearGradient id="quizpilot-body" x1="280" y1="760" x2="670" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#25264f"/>
+      <stop offset="1" stop-color="#3448a8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="474" cy="550" r="260" fill="url(#quizpilot-body)"/>
+  <circle cx="389" cy="510" r="53" fill="#fff"/>
+  <circle cx="567" cy="474" r="53" fill="#fff"/>
+  <circle cx="735" cy="290" r="75" fill="#ff9800"/>
+</svg>
