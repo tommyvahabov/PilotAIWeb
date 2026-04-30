@@ -2,7 +2,7 @@ const principles = [
   {
     number: "01",
     title: "Ship narrow",
-    body: "We pick small, well-defined problems and ship the whole product end-to-end. No abandoned features.",
+    body: "We pick small, well-defined problems and ship our products end-to-end. No abandoned features.",
   },
   {
     number: "02",
@@ -20,7 +20,7 @@ export default function Approach() {
   return (
     <section id="approach" className="relative px-4 py-24 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-6xl">
-        <div className="reveal-up mb-14 max-w-2xl">
+        <div className="mb-14 max-w-2xl">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
             [ 02 ] &nbsp; Approach
           </p>
@@ -30,13 +30,8 @@ export default function Approach() {
         </div>
 
         <div className="grid gap-10 border-t border-card-border sm:grid-cols-3 sm:gap-8">
-          {principles.map((p, i) => (
-            <div
-              key={p.number}
-              className={`reveal-up pt-8 ${
-                i === 1 ? "reveal-delay-100" : i === 2 ? "reveal-delay-200" : ""
-              }`}
-            >
+          {principles.map((p) => (
+            <div key={p.number} className="pt-8">
               <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
                 {p.number}
               </p>

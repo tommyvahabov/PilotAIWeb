@@ -6,6 +6,7 @@ type Product = {
   description: string;
   bestFor: string;
   status: "Live" | "Coming Soon";
+  accolade?: string;
   image: string;
   tone: "blue" | "amber";
   primaryAction: { label: string; href: string };
@@ -19,21 +20,21 @@ const products: Product[] = [
     name: "QuizPilot",
     tagline: "Turn documents into study sets",
     description:
-      "Upload a PDF, DOCX, or spreadsheet and generate quizzes, flashcards, and slides for faster revision and classroom practice.",
-    bestFor: "Students, teachers, and teams that need quick study material from existing files.",
+      "Upload a PDF or DOCX, or type any topic — AI generates quizzes, flashcards, and slides in seconds, with an explanation for every answer.",
+    bestFor: "Students, teachers, and teams that need quick, personalised study material from any source.",
     status: "Live",
     image: "/quizpilot-logo.svg",
     tone: "blue",
     primaryAction: { label: "Try QuizPilot", href: "https://t.me/quizpilot_bot" },
     features: [
-      "Document-to-quiz generation",
-      "Flashcards and slide creation",
-      "Group quiz workflows",
+      "AI quizzes from documents or topics",
+      "SuperFocus mode — spaced repetition for wrong answers",
+      "Group Quiz — live competition with leaderboard",
     ],
     details: [
-      { label: "Input", value: "PDF, DOCX, XLSX" },
+      { label: "Input", value: "PDF, DOCX, topic" },
       { label: "Modes", value: "Quiz, cards, slides" },
-      { label: "Access", value: "Telegram, iOS" },
+      { label: "Languages", value: "13 supported" },
     ],
     platforms: [
       { type: "telegram", href: "https://t.me/quizpilot_bot" },
@@ -44,21 +45,22 @@ const products: Product[] = [
     name: "AvtoPilot",
     tagline: "Driving theory exam practice",
     description:
-      "A focused exam-prep coach for Uzbekistan's driving theory test, with daily sprints, mistake review, and full mock exams.",
-    bestFor: "Learners preparing for the driver's license theory test in Uzbek, Russian, or English.",
+      "An AI-driven exam-prep coach for Uzbekistan's driving theory test — with weak-question repetition, live multiplayer battles, and daily sprints.",
+    bestFor: "Learners preparing for Uzbekistan's driving theory test in Uzbek or Russian.",
     status: "Live",
+    accolade: "#1 in Education · UZ App Store",
     image: "/avtopilot-logo.png",
     tone: "amber",
     primaryAction: { label: "Start AvtoPilot", href: "https://t.me/AvtoPilotQuiz_bot" },
     features: [
-      "Mistake-killer review mode",
-      "Timed mock exams",
-      "Uzbek, Russian, and English",
+      "AI-driven weak-question repetition",
+      "Battle mode — live 5-player competition",
+      "1,220+ questions, 122 official tickets",
     ],
     details: [
       { label: "Exam", value: "Driving theory" },
-      { label: "Practice", value: "Sprints, mocks" },
-      { label: "Access", value: "Telegram, iOS, Android" },
+      { label: "Practice", value: "Sprints, mocks, battle" },
+      { label: "Languages", value: "Uzbek, Russian" },
     ],
     platforms: [
       { type: "telegram", href: "https://t.me/AvtoPilotQuiz_bot" },
@@ -121,12 +123,12 @@ export default function Products() {
   return (
     <section id="products" className="relative px-4 py-24 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-6xl">
-        <div className="reveal-up mb-12 max-w-2xl">
+        <div className="mb-12 max-w-2xl">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
             [ 01 ] &nbsp; Products
           </p>
           <h2 className="mb-4 font-serif text-3xl sm:text-4xl">
-            Two products. <em className="italic text-accent-text">One studio.</em>
+            Two products. <em className="italic text-accent-text">One company.</em>
           </h2>
           <p className="text-base leading-relaxed text-muted-strong">
             Each product is built around a specific learning job, with live distribution
@@ -141,14 +143,12 @@ export default function Products() {
             return (
               <article
                 key={product.name}
-                className={`reveal-up flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card shadow-sm shadow-foreground/5 ${
-                  i === 1 ? "reveal-delay-100" : ""
-                }`}
+                className="product-card flex h-full flex-col overflow-hidden rounded-lg border border-card-border bg-card shadow-sm shadow-foreground/5"
               >
                 <div className={`border-b ${tone.border} ${tone.panel} p-6`}>
                   <div className="mb-6 flex items-start justify-between gap-4">
                     <div className="flex min-w-0 items-center gap-4">
-                      <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
+                      <div className="product-card-logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={product.image}
@@ -176,6 +176,15 @@ export default function Products() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
+                  {product.accolade && (
+                    <div className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-[11px] font-semibold text-accent-text">
+                      <svg viewBox="0 0 24 24" className="h-3 w-3" fill="currentColor" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      {product.accolade}
+                    </div>
+                  )}
+
                   <div className="mb-6">
                     <p className="mb-3 text-xs font-semibold uppercase text-muted">
                       Best for
@@ -212,7 +221,7 @@ export default function Products() {
                       href={product.primaryAction.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background transition-all hover:bg-foreground/85 hover:shadow-lg hover:shadow-foreground/10"
+                      className="cta-primary inline-flex min-h-12 w-full items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background hover:bg-foreground/85 hover:shadow-lg hover:shadow-foreground/10"
                     >
                       {product.primaryAction.label}
                     </a>
@@ -224,7 +233,7 @@ export default function Products() {
                           href={p.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-card-border bg-warm-bg px-4 text-sm font-medium text-foreground transition-all hover:border-foreground/20 hover:bg-card"
+                          className="cta-secondary inline-flex min-h-11 items-center gap-2 rounded-full border border-card-border bg-warm-bg px-4 text-sm font-medium text-foreground hover:border-foreground/20 hover:bg-card"
                         >
                           <PlatformIcon type={p.type} />
                           {platformLabel[p.type]}

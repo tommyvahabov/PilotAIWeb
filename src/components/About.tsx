@@ -9,12 +9,12 @@ export default function About() {
   return (
     <section id="about" className="relative border-y border-card-border bg-card px-4 py-24 sm:px-6 lg:py-28">
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-        <div className="reveal-up">
+        <div>
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
-            [ 03 ] &nbsp; The Studio
+            [ 03 ] &nbsp; The Company
           </p>
           <h2 className="mb-8 font-serif text-3xl sm:text-4xl">
-            A small studio, <em className="italic text-accent-text">shipping with care.</em>
+            An independent AI product company, <em className="italic text-accent-text">shipping with care.</em>
           </h2>
 
           <dl className="border-y border-card-border">
@@ -34,9 +34,9 @@ export default function About() {
           </dl>
         </div>
 
-        <div className="reveal-up reveal-delay-100 space-y-6 text-base leading-relaxed text-muted-strong sm:text-lg">
+        <div className="space-y-6 text-base leading-relaxed text-muted-strong sm:text-lg">
           <p>
-            Pilot AI Systems is an independent studio building AI-native software
+            Pilot AI Systems is an independent product company building AI-native software
             for learners. We work in the spaces large platforms ignore —{" "}
             <em className="italic text-accent-text">overlooked markets, narrow problems, real outcomes.</em>
           </p>

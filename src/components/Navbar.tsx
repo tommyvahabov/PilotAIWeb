@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="reveal-down fixed top-0 left-0 right-0 z-50 border-b border-card-border bg-background/80 backdrop-blur-xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-card-border bg-background/80 backdrop-blur-xl"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         <a href="#" className="flex min-h-11 items-center">
@@ -33,14 +33,14 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-muted transition-colors hover:text-foreground"
+              className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/75"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="inline-flex min-h-11 items-center rounded-full bg-foreground px-5 text-sm font-medium text-background transition-all hover:bg-foreground/80"
+            className="cta-primary inline-flex min-h-11 items-center rounded-full bg-foreground px-5 text-sm font-medium text-background hover:bg-foreground/80"
           >
             Get in Touch
           </a>
@@ -70,7 +70,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-muted transition-colors hover:text-foreground"
+                className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/75"
               >
                 {link.label}
               </a>

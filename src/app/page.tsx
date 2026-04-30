@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import Products from "@/components/Products";
@@ -13,6 +14,7 @@ export default function Home() {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
+      <ScrollProgress />
       <Navbar />
       <main id="main-content">
         <Hero />

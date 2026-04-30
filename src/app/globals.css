@@ -88,78 +88,214 @@ section[id],
   transform: translateY(0);
 }
 
+/* ─────────────────────────────────────────────
+   Motion system
+   1 mount sequence (hero)
+   1 looping element (radar)
+   1 scroll-driven (progress bar — handled inline)
+   1 scroll-triggered (stats count-up — JS)
+   coordinated hover choreography (cards, ctas, nav)
+   ───────────────────────────────────────────── */
+
 @media (prefers-reduced-motion: no-preference) {
-  .reveal-up,
-  .reveal-down,
-  .reveal-fade {
-    animation-duration: 600ms;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Hero entry — eyebrow rule draws */
+  .hero-rule {
+    transform-origin: left;
+    animation: rule-draw 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .reveal-up {
-    animation-name: reveal-up;
+  .hero-eyebrow-text {
+    animation: fade-in 400ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .reveal-down {
-    animation-name: reveal-down;
+  /* Hero H1 — word-by-word clip-path reveal */
+  .hero-word {
+    display: inline-block;
+    clip-path: inset(0 100% 0 0);
+    animation: word-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .reveal-fade {
-    animation-name: reveal-fade;
+  .hero-word-1 { animation-delay: 200ms; }
+  .hero-word-2 { animation-delay: 280ms; }
+  .hero-word-3 { animation-delay: 360ms; }
+  .hero-word-4 { animation-delay: 440ms; }
+  .hero-word-5 { animation-delay: 520ms; }
+  .hero-word-6 { animation-delay: 600ms; }
+  .hero-word-7 { animation-delay: 680ms; }
+
+  /* Italic accent word — clip-path reveal then color shift */
+  .hero-word-accent {
+    display: inline-block;
+    color: var(--foreground);
+    clip-path: inset(0 100% 0 0);
+    animation:
+      word-reveal 700ms 680ms cubic-bezier(0.22, 1, 0.36, 1) both,
+      accent-shift 400ms 1500ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .reveal-delay-100 {
-    animation-delay: 100ms;
+  /* Hero sub + CTAs — fade in after last word lands */
+  .hero-late {
+    animation: fade-in 500ms 1380ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .reveal-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .reveal-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .reveal-delay-350 {
-    animation-delay: 350ms;
-  }
-
-  .reveal-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .reveal-delay-650 {
-    animation-delay: 650ms;
-  }
-}
-
-@keyframes reveal-up {
-  from {
-    transform: translateY(20px);
-  }
-
-  to {
-    transform: translateY(0);
+  /* Cockpit fade-in coordinated with H1 */
+  .hero-cockpit {
+    animation: fade-in 800ms 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 
-@keyframes reveal-down {
-  from {
-    transform: translateY(-20px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
+@keyframes word-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
 
-@keyframes reveal-fade {
-  from {
-    transform: translateY(8px);
+@keyframes rule-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes accent-shift {
+  from { color: var(--foreground); }
+  to { color: var(--accent-text); }
+}
+
+/* Radar pulse — looping, replaces animate-ping */
+@keyframes radar {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.radar-ring {
+  animation: radar 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.radar-ring--delayed {
+  animation-delay: 1s;
+}
+
+/* Card hover choreography */
+.product-card {
+  position: relative;
+  transition:
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms 50ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--foreground);
+  box-shadow: 0 20px 40px -20px rgba(26, 26, 25, 0.15);
+}
+
+.product-card:hover::after {
+  transform: scaleX(1);
+}
+
+.product-card-logo {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-card-logo {
+  transform: rotate(-8deg);
+}
+
+/* Nav link underline draw */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* CTA primary — explicit transitions */
+.cta-primary {
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-secondary {
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Magnetic button wrapper — JS sets transform inline */
+.magnetic-cta {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* Reduced motion fallback — no transforms, no clip-paths */
+@media (prefers-reduced-motion: reduce) {
+  .hero-rule,
+  .hero-eyebrow-text,
+  .hero-word,
+  .hero-word-accent,
+  .hero-late,
+  .hero-cockpit {
+    animation: fade-in 200ms ease both !important;
+    clip-path: none !important;
+    transform: none !important;
   }
 
-  to {
-    transform: translateY(0);
+  .radar-ring,
+  .radar-ring--delayed {
+    animation: none !important;
+  }
+
+  .product-card:hover {
+    transform: none !important;
+  }
+
+  .product-card:hover .product-card-logo {
+    transform: none !important;
+  }
+
+  .scroll-progress {
+    display: none !important;
   }
 }
