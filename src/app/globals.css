@@ -201,22 +201,24 @@ section[id],
   pointer-events: none;
 }
 
-.product-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--foreground);
-  box-shadow: 0 20px 40px -20px rgba(26, 26, 25, 0.15);
-}
-
-.product-card:hover::after {
-  transform: scaleX(1);
-}
-
 .product-card-logo {
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.product-card:hover .product-card-logo {
-  transform: rotate(-8deg);
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--foreground);
+    box-shadow: 0 20px 40px -20px rgba(26, 26, 25, 0.15);
+  }
+
+  .product-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .product-card:hover .product-card-logo {
+    transform: rotate(-8deg);
+  }
 }
 
 /* Nav link underline draw */

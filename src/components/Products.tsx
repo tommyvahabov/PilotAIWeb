@@ -148,7 +148,7 @@ export default function Products() {
                 <div className={`border-b ${tone.border} ${tone.panel} p-6`}>
                   <div className="mb-6 flex items-start justify-between gap-4">
                     <div className="flex min-w-0 items-center gap-4">
-                      <div className="product-card-logo flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
+                      <div className="product-card-logo flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-card shadow-sm">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={product.image}
