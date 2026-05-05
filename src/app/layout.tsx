@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { DM_Serif_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,6 +39,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script id="nimpo-widget-config" strategy="beforeInteractive">
+          {`window.Nimpo = { widgetKey: 'cmosvabd8000catniix15bjy3' };`}
+        </Script>
+        <Script
+          id="nimpo-widget"
+          src="https://widget.nimpo.cc/widget.js"
+          strategy="afterInteractive"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} antialiased`}
       >
